@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ISC2 Practice Exams — Exam 1 &amp; Exam 2 (100 Questions Each)</title>
+    <meta name="description" content="Free ISC2 practice exams: Security Principles &amp; Operations (Exam 1) and Network Security Fundamentals (Exam 2). 100 multiple-choice questions each, CISSP and CC style.">
+    <meta name="keywords" content="ISC2 practice exam, CISSP practice questions, CC exam prep, security principles, network security, TCP UDP ports, OSI model">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Libre Baskerville', 'Georgia', 'serif'],
+                        sans: ['Source Sans 3', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        notary: {
+                            50: '#f8f6f0',
+                            100: '#ebe5d4',
+                            200: '#d9ccad',
+                            300: '#c4b080',
+                            400: '#b3965f',
+                            500: '#a6844f',
+                            600: '#8f6b43',
+                            700: '#735339',
+                            800: '#604633',
+                            900: '#513c2d',
+                        },
+                        seal: '#8b2942',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .option-card:hover { @apply border-seal/50 bg-notary-50; }
+        .option-card.selected { @apply border-seal bg-seal/10 ring-2 ring-seal/30; }
+        .option-card.correct { @apply border-emerald-600 bg-emerald-50; }
+        .option-card.incorrect { @apply border-red-500 bg-red-50; }
+        .progress-bar { transition: width 0.4s ease-out; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 1rem); }
+        @media (max-width: 640px) {
+            .option-card { min-height: 48px; touch-action: manipulation; }
+            .exam-start-btn { touch-action: manipulation; }
+            html { -webkit-text-size-adjust: 100%; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-notary-50 via-white to-notary-100 font-sans text-notary-900 overflow-x-hidden">
+    <div class="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-8 md:py-12 pb-safe min-w-0">
+        <!-- Header -->
+        <header class="text-center mb-6 sm:mb-10">
+            <p class="text-lg sm:text-xl md:text-2xl text-notary-800 font-semibold mb-2 sm:mb-3">
+                Candidate name: <span id="candidate-name-display" class="text-seal font-bold">Candidate</span>
+            </p>
+            <div class="flex justify-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                <label for="candidate-name-input" class="sr-only">Update candidate name</label>
+                <input
+                    id="candidate-name-input"
+                    type="text"
+                    maxlength="40"
+                    autocomplete="name"
+                    class="w-40 sm:w-56 px-3 py-1.5 text-sm rounded-lg border border-notary-300 bg-white/80 focus:outline-none focus:ring-2 focus:ring-seal/50 focus:border-seal"
+                    placeholder="Enter your name"
+                />
+                <button
+                    id="candidate-name-save"
+                    type="button"
+                    class="px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white bg-seal hover:bg-seal/90 transition-colors"
+                >
+                    Save
+                </button>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-seal/10 text-seal text-sm font-semibold mb-4">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.244 7.243a3.066 3.066 0 012.812 2.812 3.066 3.066 0 00.723 1.745 3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812z" clip-rule="evenodd"/></svg>
+                ISC2 Exam Prep
+            </div>
+            <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-notary-800">ISC2 Practice Exams</h1>
+            <p class="mt-2 text-notary-600 font-medium text-sm sm:text-base">Two full exams (100 questions each) • CISSP &amp; CC style (180 minutes suggested per exam)</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="space-y-6">
+            <div class="bg-white/90 rounded-xl sm:rounded-2xl shadow-lg shadow-notary-200/60 p-5 sm:p-7 md:p-8 border border-notary-200/70">
+                <div class="text-center mb-5 sm:mb-6">
+                    <h2 class="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-notary-800 mb-1">Choose an exam</h2>
+                    <p class="text-notary-600 text-sm sm:text-base">After saving your name, start Exam 1 or Exam 2. Questions follow the order in the question bank.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <button
+                        type="button"
+                        data-exam="exam1"
+                        class="exam-start-btn flex flex-col items-start gap-2 px-4 sm:px-5 py-4 sm:py-5 rounded-xl border-2 border-seal bg-seal/10 text-left hover:bg-seal/15 transition-colors min-h-[56px]"
+                    >
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wide text-seal">Exam 1</span>
+                        <span class="font-serif text-lg sm:text-xl font-bold text-notary-800">Security Principles &amp; Operations</span>
+                        <p class="text-xs sm:text-sm text-notary-600">Security principles, incident response, BC/DR, access controls, network security, security operations.</p>
+                    </button>
+                    <button
+                        type="button"
+                        data-exam="exam2"
+                        class="exam-start-btn flex flex-col items-start gap-2 px-4 sm:px-5 py-4 sm:py-5 rounded-xl border-2 border-notary-300 bg-notary-50 text-left hover:border-seal hover:bg-seal/5 transition-colors min-h-[56px]"
+                    >
+                        <span class="text-xs sm:text-sm font-bold uppercase tracking-wide text-notary-700">Exam 2</span>
+                        <span class="font-serif text-lg sm:text-xl font-bold text-notary-800">Network Security Fundamentals</span>
+                        <p class="text-xs sm:text-sm text-notary-600">TCP/UDP ports, network protocols, OSI model, security scenarios.</p>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white/90 rounded-xl sm:rounded-2xl shadow-lg shadow-notary-200/60 p-5 sm:p-7 md:p-8 border border-notary-200/70">
+                <div class="text-center mb-5 sm:mb-6">
+                    <h2 class="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-notary-800 mb-1">Flashcard review</h2>
+                    <p class="text-notary-600 text-sm sm:text-base">Study one question at a time with answers and explanations. Shuffle works within the deck you choose.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <button
+                        id="start-flashcards-exam1-btn"
+                        type="button"
+                        class="flex flex-col items-start gap-2 px-4 sm:px-5 py-4 sm:py-5 rounded-xl border-2 border-notary-900 bg-notary-900 text-white text-left shadow-md hover:bg-notary-800 hover:border-notary-800 transition-colors"
+                    >
+                        <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-wide">Flashcards — Exam 1</span>
+                        <p class="text-xs sm:text-sm opacity-90">Security Principles &amp; Operations (full bank, shuffled)</p>
+                    </button>
+                    <button
+                        id="start-flashcards-exam2-btn"
+                        type="button"
+                        class="flex flex-col items-start gap-2 px-4 sm:px-5 py-4 sm:py-5 rounded-xl border-2 border-notary-300 bg-white text-left hover:border-notary-900 hover:bg-notary-50 transition-colors"
+                    >
+                        <span class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-wide text-notary-800">Flashcards — Exam 2</span>
+                        <p class="text-xs sm:text-sm text-notary-600">Network Security Fundamentals (full bank, shuffled)</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Container (hidden initially) -->
+        <div id="quiz-container" class="hidden">
+            <!-- Exam Year Badge & Candidate -->
+            <div class="mb-3 sm:mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
+                <span id="exam-year-badge" class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-seal/10 text-seal text-xs sm:text-sm font-semibold"></span>
+                <span class="text-notary-600 text-xs sm:text-sm">Candidate: <span id="candidate-name-inline" class="font-semibold text-notary-800">Candidate</span></span>
+            </div>
+            <!-- Progress -->
+            <div class="mb-4 sm:mb-8">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-notary-600 mb-2">
+                    <span>Question <span id="current-q">1</span> of <span id="quiz-total">100</span></span>
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <span id="timer-display" class="inline-flex items-center gap-1.5 font-mono tabular-nums">
+                            <svg class="w-4 h-4 text-notary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span id="timer-value">0:00</span>
+                        </span>
+                        <span id="score-display" class="text-seal"></span>
+                    </div>
+                </div>
+                <div class="h-2 bg-notary-200 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="progress-bar h-full bg-seal rounded-full" style="width: 2.5%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl shadow-notary-200/50 p-4 sm:p-8 md:p-10 border border-notary-200/60">
+                <h2 id="question-text" class="font-serif text-base sm:text-xl md:text-2xl font-bold text-notary-800 mb-4 sm:mb-6 leading-relaxed break-words"></h2>
+                <div id="options-container" class="space-y-2 sm:space-y-3"></div>
+                <div id="feedback" class="mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl hidden text-sm sm:text-base"></div>
+                <div class="mt-6 sm:mt-8 flex flex-col-reverse sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-3">
+                    <div class="flex gap-2 sm:gap-3 justify-center sm:justify-start">
+                        <button id="prev-btn" class="flex-1 sm:flex-none min-h-[44px] px-4 sm:px-5 py-2.5 text-notary-600 hover:text-seal font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-sm sm:text-base" disabled>
+                            ← Previous
+                        </button>
+                        <button id="next-btn" class="flex-1 sm:flex-none min-h-[44px] px-4 sm:px-5 py-2.5 bg-seal hover:bg-seal/90 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base">
+                            Next →
+                        </button>
+                    </div>
+                    <button id="exit-exam-btn" class="w-full sm:w-auto min-h-[44px] px-5 py-2.5 text-red-600 hover:text-red-700 hover:bg-red-50 font-medium rounded-lg transition-colors text-sm sm:text-base">
+                        Exit Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden text-center bg-white rounded-xl sm:rounded-2xl shadow-xl shadow-notary-200/50 p-6 sm:p-10 md:p-14 border border-notary-200/60">
+            <div id="results-icon" class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full flex items-center justify-center"></div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-notary-800 mb-2">
+                Exam Complete, <span id="candidate-name-results">Candidate</span>
+            </h2>
+            <p id="results-exam-year" class="text-notary-500 text-sm mb-2"></p>
+            <p id="results-score" class="text-xl sm:text-2xl font-semibold text-seal mb-4 sm:mb-6"></p>
+            <p id="results-message" class="text-notary-600 mb-6 sm:mb-8 max-w-md mx-auto text-sm sm:text-base px-1"></p>
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                <button id="retry-btn" class="w-full sm:w-auto min-h-[48px] px-8 sm:px-10 py-3 sm:py-4 bg-seal hover:bg-seal/90 text-white font-semibold rounded-xl shadow-lg transition-all text-sm sm:text-base">
+                    Try Again
+                </button>
+                <button id="back-to-exams-btn" class="w-full sm:w-auto min-h-[48px] px-8 sm:px-10 py-3 sm:py-4 bg-notary-200 hover:bg-notary-300 text-notary-800 font-semibold rounded-xl transition-all text-sm sm:text-base">
+                    Back to Menu
+                </button>
+            </div>
+        </div>
+
+        <!-- Flashcards Screen -->
+        <div id="flashcard-container" class="hidden">
+            <div class="mb-3 sm:mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
+                <span class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-notary-900 text-notary-50 text-xs sm:text-sm font-semibold">
+                    Flashcard Review
+                </span>
+                <span class="text-notary-600 text-xs sm:text-sm">
+                    Candidate: <span id="candidate-name-flashcards" class="font-semibold text-notary-800">Candidate</span>
+                </span>
+            </div>
+            <div class="mb-4 sm:mb-6 flex flex-wrap justify-between items-center gap-2 text-xs sm:text-sm text-notary-600 font-medium">
+                <span id="flashcard-counter">Card 1 of 100</span>
+                <button
+                    id="shuffle-flashcards-btn"
+                    type="button"
+                    class="inline-flex items-center gap-1.5 text-xs sm:text-sm text-seal hover:text-seal/90"
+                >
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h5l2 3-2 3H4m11-6h5M9 13h1l2 3-2 3H4m11-6h5" />
+                    </svg>
+                    Shuffle deck
+                </button>
+            </div>
+            <div class="bg-white rounded-xl sm:rounded-2xl shadow-xl shadow-notary-200/50 p-4 sm:p-8 md:p-10 border border-notary-200/60">
+                <p class="text-xs sm:text-sm uppercase tracking-wide text-notary-500 mb-2" id="flashcard-topic-label">Exam 1: Security Principles &amp; Operations</p>
+                <h2 id="flashcard-question" class="font-serif text-base sm:text-xl md:text-2xl font-bold text-notary-800 mb-4 sm:mb-6 leading-relaxed break-words"></h2>
+                <div id="flashcard-answer" class="hidden mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl bg-notary-50 border border-notary-200 text-sm sm:text-base text-notary-800 space-y-2">
+                    <div id="flashcard-options" class="space-y-1.5 sm:space-y-2"></div>
+                    <p id="flashcard-explanation" class="text-xs sm:text-sm text-notary-700 mt-2"></p>
+                </div>
+                <div class="mt-5 sm:mt-7 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex gap-2 sm:gap-3 justify-center sm:justify-start">
+                        <button
+                            id="flashcard-prev-btn"
+                            type="button"
+                            class="flex-1 sm:flex-none min-h-[44px] px-4 sm:px-5 py-2.5 text-notary-600 hover:text-seal font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed text-sm sm:text-base"
+                        >
+                            ← Previous
+                        </button>
+                        <button
+                            id="flashcard-next-btn"
+                            type="button"
+                            class="flex-1 sm:flex-none min-h-[44px] px-4 sm:px-5 py-2.5 bg-notary-900 hover:bg-notary-800 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
+                        >
+                            Next →
+                        </button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                        <button
+                            id="flashcard-toggle-answer-btn"
+                            type="button"
+                            class="w-full sm:w-auto min-h-[40px] px-4 sm:px-5 py-2 text-seal border border-seal/40 rounded-lg text-sm sm:text-base font-semibold bg-white hover:bg-seal/5 transition-colors"
+                        >
+                            Show Answer
+                        </button>
+                        <button
+                            id="exit-flashcards-btn"
+                            type="button"
+                            class="w-full sm:w-auto min-h-[40px] px-4 sm:px-5 py-2 text-notary-600 hover:text-seal hover:bg-notary-50 rounded-lg text-sm sm:text-base font-medium transition-colors"
+                        >
+                            Back to Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 sm:mt-16 pt-6 sm:pt-8 pb-4 text-center text-notary-500 text-xs sm:text-sm border-t border-notary-200/60">
+            <p>Developed by Mark © 2026. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="questions-exam2-network.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
